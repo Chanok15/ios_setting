@@ -214,5 +214,34 @@ class _WifiScreenState extends State<WifiScreen> {
       ),
     );
   }
+//committ by rence
+  Widget _wifiNetworkTile(String networkName) {
+    return CupertinoListTile(
+      title: Text(networkName, style: const TextStyle(color: CupertinoColors.white)),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(CupertinoIcons.wifi, color: CupertinoColors.systemGrey),
+          const SizedBox(width: 5),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {},
+            child: Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: CupertinoColors.activeBlue, width: 1.5),
+              ),
+              child: const Center(
+                child: Icon(CupertinoIcons.info, color: CupertinoColors.activeBlue, size: 18),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
