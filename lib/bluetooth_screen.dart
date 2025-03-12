@@ -107,3 +107,52 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
       ],
     );
   }
+  //committ by rence
+  Widget _bluetoothHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: CupertinoColors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: CupertinoColors.black,
+              borderRadius: BorderRadius.circular(12), // Rounded corners
+            ),
+            child: const Center(
+              child: Icon(
+                CupertinoIcons.bluetooth,
+                size: 40,
+                color: CupertinoColors.white, // White icon
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Bluetooth",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 5),
+          const Text(
+            "Connect to accessories you can use for activities such as streaming music, making phone calls, and gaming.",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: CupertinoColors.systemGrey, fontSize: 14),
+          ),
+          const SizedBox(height: 5),
+          GestureDetector(
+            onTap: () {}, // Add action for Learn More
+            child: const Text(
+              "Learn More...",
+              style: TextStyle(color: CupertinoColors.activeBlue, fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
