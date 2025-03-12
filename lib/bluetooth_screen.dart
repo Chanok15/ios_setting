@@ -181,3 +181,22 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
     );
   }
 
+  //committ by christian
+  void _showDeviceInfo(String deviceName, String status) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text("$deviceName Info"),
+        content: Text("Status: $status"),
+        actions: [
+          CupertinoDialogAction(
+            child: const Text("OK"),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
