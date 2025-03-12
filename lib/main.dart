@@ -262,11 +262,13 @@ class _WifiScreenState extends State<WifiScreen> {
 
 Widget _iconWithColor(IconData icon, Color color) {
   return Container(
-    padding: const EdgeInsets.all(6),
+    width: 30, //
+    height: 30,
     decoration: BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(10),
     ),
-    child: Icon(icon, color: CupertinoColors.white, size: 22),
+    alignment: Alignment.center,
+    child: Icon(icon, color: CupertinoColors.white, size: 20), 
   );
 }
