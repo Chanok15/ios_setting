@@ -243,5 +243,16 @@ class _WifiScreenState extends State<WifiScreen> {
     );
   }
 }
+//committ by aron
+Widget _iconWithColor(IconData icon, Color color) {
+  return Container(
+    padding: const EdgeInsets.all(6),
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Icon(icon, color: CupertinoColors.white, size: 22),
+  );
+}
 
 
