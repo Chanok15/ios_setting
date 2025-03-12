@@ -165,3 +165,54 @@ class _WifiScreenState extends State<WifiScreen> {
     );
   }
 
+  //committ by christian
+  Widget _wifiHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: CupertinoColors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: CupertinoColors.black,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Center(
+              child: Icon(
+                CupertinoIcons.wifi,
+                size: 40,
+                color: CupertinoColors.white,
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Wi-Fi",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 5),
+          const Text(
+            "Connect to Wi-Fi, view available networks, and manage settings for joining networks and nearby hotspots.",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: CupertinoColors.systemGrey, fontSize: 14),
+          ),
+          const SizedBox(height: 5),
+          GestureDetector(
+            onTap: () {},
+            child: const Text(
+              "Learn More...",
+              style: TextStyle(color: CupertinoColors.activeBlue, fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
