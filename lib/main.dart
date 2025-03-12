@@ -84,4 +84,84 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
+//commit by aron
+class WifiScreen extends StatefulWidget {
+  const WifiScreen({super.key});
+
+  @override
+  _WifiScreenState createState() => _WifiScreenState();
+}
+
+class _WifiScreenState extends State<WifiScreen> {
+  bool isWifiEnabled = true;
+  bool isWifiSwitchLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.black,
+      navigationBar: CupertinoNavigationBar(
+        backgroundColor: CupertinoColors.black,
+        middle: const Text("Wi-Fi", style: TextStyle(color: CupertinoColors.white)),
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: const Icon(CupertinoIcons.back, color: CupertinoColors.activeBlue),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: const Text("Edit", style: TextStyle(color: CupertinoColors.activeBlue)),
+          onPressed: () {},
+        ),
+      ),
+      child: ListView(
+        children: [
+          const SizedBox(height: 10),
+          _wifiHeader(),
+          const SizedBox(height: 10),
+          CupertinoListSection.insetGrouped(
+            backgroundColor: CupertinoColors.black,
+            children: [
+              CupertinoListTile(
+                title: const Text("Wi-Fi", style: TextStyle(color: CupertinoColors.white)),
+                trailing: isWifiSwitchLoading
+                    ? const CupertinoActivityIndicator(radius: 10) // ✅ 0.5s delay
+                    : CupertinoSwitch(
+                        value: isWifiEnabled,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isWifiSwitchLoading = true;
+                          });
+
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            setState(() {
+                              isWifiSwitchLoading = false;
+                              isWifiEnabled = value;
+                            });
+                          });
+                        },
+                      ),
+              ),
+            ],
+          ),
+          if (isWifiEnabled) ...[
+            CupertinoListSection.insetGrouped(
+              backgroundColor: CupertinoColors.black,
+              header: const Text("OTHER NETWORKS", style: TextStyle(color: CupertinoColors.white)),
+              children: [
+                _wifiNetworkTile("HCC_ICS_Lab"),
+                _wifiNetworkTile("Network_1"),
+                _wifiNetworkTile("Network_2"),
+                _wifiNetworkTile("Network_3"),
+                _wifiNetworkTile("Guest_Wifi"),
+                _wifiNetworkTile("Other..."),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 
