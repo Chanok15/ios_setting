@@ -78,3 +78,32 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
               ),
           ],
         ),
+//commit by christian
+        const SizedBox(height: 10),
+        if (isBluetoothEnabled) ...[
+          CupertinoListSection.insetGrouped(
+            header: const Text("MY DEVICES"),
+            children: [
+              _bluetoothDeviceTile("Beats Pro", "Connected"),
+              _bluetoothDeviceTile("K12", "Not Connected"),
+              _bluetoothDeviceTile("JBL WAVE BUDS", "Not Connected"),
+              _bluetoothDeviceTile("Bluetooth", "Not Connected"),
+              _bluetoothDeviceTile("Apple AirPods Pro", "Not Connected"),
+            ],
+          ),
+          CupertinoListSection.insetGrouped(
+            header: Row(
+              children: [
+                const Expanded(child: Text("OTHER DEVICES")),
+                if (isSearching)
+                  const CupertinoActivityIndicator(radius: 8), // Show searching animation
+              ],
+            ),
+            children: [
+              _bluetoothDeviceTile("AirPods Pro", "Pairing..."),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
