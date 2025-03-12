@@ -1,4 +1,3 @@
-// commit by christian
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bluetooth_screen.dart';
@@ -18,6 +17,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool _showMemberDialog = false; // State to control dialog visibility
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -29,7 +30,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // commit by rence
   Widget _mainSettings() {
     return ListView(
       children: [
@@ -78,14 +78,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
               additionalInfo: const Text("Off"),
               trailing: const CupertinoListTileChevron(),
             ),
+            // Added Show Members option
+            CupertinoListTile(
+              title: const Text("Show Members"),
+              leading: _iconWithColor(CupertinoIcons.person_3, CupertinoColors.systemIndigo),
+              trailing: const CupertinoListTileChevron(),
+              onTap: () {
+                _showMembersDialog();
+              },
+            ),
           ],
         ),
       ],
     );
   }
+
+  void _showMembersDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: const Text("Team Members"),
+        content: Column(
+          children: const [
+            Text(" Rence Estoque"),
+            Text(" Aron Villa"),
+            Text(" Christian Suva"),
+          ],
+        ),
+
+        actions: [
+          CupertinoDialogAction(
+            child: const Text("Close"),
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                _showMemberDialog = false;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-//commit by aron
+// Wi-Fi Screen
 class WifiScreen extends StatefulWidget {
   const WifiScreen({super.key});
 
@@ -128,22 +165,22 @@ class _WifiScreenState extends State<WifiScreen> {
               CupertinoListTile(
                 title: const Text("Wi-Fi", style: TextStyle(color: CupertinoColors.white)),
                 trailing: isWifiSwitchLoading
-                    ? const CupertinoActivityIndicator(radius: 10) // ✅ 0.5s delay
+                    ? const CupertinoActivityIndicator(radius: 10)
                     : CupertinoSwitch(
-                        value: isWifiEnabled,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isWifiSwitchLoading = true;
-                          });
+                  value: isWifiEnabled,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isWifiSwitchLoading = true;
+                    });
 
-                          Future.delayed(const Duration(milliseconds: 500), () {
-                            setState(() {
-                              isWifiSwitchLoading = false;
-                              isWifiEnabled = value;
-                            });
-                          });
-                        },
-                      ),
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      setState(() {
+                        isWifiSwitchLoading = false;
+                        isWifiEnabled = value;
+                      });
+                    });
+                  },
+                ),
               ),
             ],
           ),
@@ -166,7 +203,6 @@ class _WifiScreenState extends State<WifiScreen> {
     );
   }
 
-  //committ by christian
   Widget _wifiHeader() {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -199,7 +235,7 @@ class _WifiScreenState extends State<WifiScreen> {
           ),
           const SizedBox(height: 5),
           const Text(
-            "Connect to Wi-Fi, view available networks, and manage settings for joining networks and nearby hotspots.",
+            "Connect to Wi-Fi, view available networks, and manage settings.",
             textAlign: TextAlign.center,
             style: TextStyle(color: CupertinoColors.systemGrey, fontSize: 14),
           ),
@@ -215,36 +251,15 @@ class _WifiScreenState extends State<WifiScreen> {
       ),
     );
   }
-//committ by rence
+
   Widget _wifiNetworkTile(String networkName) {
     return CupertinoListTile(
       title: Text(networkName, style: const TextStyle(color: CupertinoColors.white)),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(CupertinoIcons.wifi, color: CupertinoColors.systemGrey),
-          const SizedBox(width: 5),
-          CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {},
-            child: Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: CupertinoColors.activeBlue, width: 1.5),
-              ),
-              child: const Center(
-                child: Icon(CupertinoIcons.info, color: CupertinoColors.activeBlue, size: 18),
-              ),
-            ),
-          ),
-        ],
-      ),
+      trailing: const Icon(CupertinoIcons.wifi, color: CupertinoColors.systemGrey),
     );
   }
 }
-//committ by aron
+
 Widget _iconWithColor(IconData icon, Color color) {
   return Container(
     padding: const EdgeInsets.all(6),
@@ -255,5 +270,3 @@ Widget _iconWithColor(IconData icon, Color color) {
     child: Icon(icon, color: CupertinoColors.white, size: 22),
   );
 }
-
-
