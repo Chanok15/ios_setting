@@ -156,3 +156,28 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
       ),
     );
   }
+  //committ by aron
+  Widget _bluetoothDeviceTile(String deviceName, String status) {
+    return CupertinoListTile(
+      title: Text(deviceName),
+      additionalInfo: Text(status, style: const TextStyle(color: CupertinoColors.systemGrey)),
+      trailing: CupertinoButton(
+        padding: EdgeInsets.zero,
+        onPressed: () {
+          _showDeviceInfo(deviceName, status);
+        },
+        child: Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: CupertinoColors.activeBlue, width: 1.5),
+          ),
+          child: const Center(
+            child: Icon(CupertinoIcons.info, color: CupertinoColors.activeBlue, size: 18),
+          ),
+        ),
+      ),
+    );
+  }
+
